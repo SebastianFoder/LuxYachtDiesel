@@ -1,0 +1,230 @@
+﻿<UserControl x:Class="GUI.UserControlSupplier"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid x:Name="MainGrid" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <ListView Grid.Row="0"
+                  Grid.Column="0"
+                  Grid.RowSpan="12"
+                  Margin="3"
+                  ItemsSource="{Binding listSuppliers}"
+                  SelectedItem="{Binding selectedSupplier}"
+                  IsEnabled="{Binding UCSIsReadOnly}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Firma"
+                                    Width="150" 
+                                    DisplayMemberBinding="{Binding firmName}"/>
+                    <GridViewColumn Header="By"
+                                    Width="75" 
+                                    DisplayMemberBinding="{Binding city}"/>
+                    <GridViewColumn Header="Land"
+                                    Width="120" 
+                                    DisplayMemberBinding="{Binding country.country}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Grid.Row="0"
+               Grid.Column="1"
+               Content="ID:"
+               Margin="3"
+               VerticalContentAlignment="Center" />
+        <Label Grid.Row="0"
+               Grid.Column="2"
+               Content="{Binding fallbackSupplier.Id}"
+               Margin="3"
+               FontSize="18"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center" />
+        <Label Content="Firma:"
+               Grid.Row="1"
+               Grid.Column="1"
+               Margin="3"
+               VerticalContentAlignment="Center" />
+        <Label Content="Kontakt:"
+               Grid.Row="2"
+               Grid.Column="1"
+               Margin="3"
+               VerticalContentAlignment="Center" />
+        <Label Content="Adresse:"
+               Grid.Row="3"
+               Grid.Column="1"
+               Margin="3"
+               VerticalContentAlignment="Center" />
+        <Grid Grid.Column="1"
+              Grid.Row="4"
+              Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="55" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Post nr:"
+                   Grid.Column="0"
+                   Margin="3"
+                   VerticalContentAlignment="Center" />
+            <Label Content="Bynavn:"
+                   Grid.Column="2"
+                   Margin="3"
+                   VerticalContentAlignment="Center" />
+            <TextBox Grid.Column="1"
+                     Text="{Binding fallbackSupplier.postalCode}"
+                     Margin="3"
+                     FontSize="16"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center"
+                     IsReadOnly="{Binding UCSIsReadOnly}"/>
+            <TextBox Grid.Column="3"
+                     Text="{Binding fallbackSupplier.city}"
+                     Margin="3"
+                     FontSize="16"
+                     HorizontalContentAlignment="Left"
+                     VerticalContentAlignment="Center"
+                     IsReadOnly="{Binding UCSIsReadOnly}"/>
+        </Grid>
+        <Label Content="Land:"
+               Grid.Row="5"
+               Grid.Column="1"
+               Margin="3"
+               VerticalContentAlignment="Center" />
+        <Label Content="Telefon:"
+               Grid.Row="6"
+               Grid.Column="1"
+               Margin="3"
+               VerticalContentAlignment="Center" />
+        <Label Content="Mail:"
+               Grid.Row="7"
+               Grid.Column="1"
+               Margin="3"
+               VerticalContentAlignment="Center" />
+        <Label Content="Is activ:"
+               Grid.Row="8"
+               Grid.Column="1"
+               Margin="3"
+               VerticalContentAlignment="Center" />
+        <CheckBox Content="Is activ"
+                  Grid.Row="8"
+                  Grid.Column="2"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center"
+                  IsChecked="{Binding fallbackSupplier.isEnabled}" 
+                  IsEnabled="{Binding UCSIsReadOnlyOpp}"/>
+        <Grid Grid.Row="9"
+              Grid.Column="2"
+              Grid.ColumnSpan="2"
+              Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Button x:Name="ButtonOpret"
+                    Content="Opret"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Margin="3"
+                    Visibility="Visible" Click="ButtonOpret_Click" />
+            <Button x:Name="ButtonRediger"
+                    Content="Rediger"
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    Margin="3"
+                    Visibility="Visible" Click="ButtonRediger_Click" />
+            <Button x:Name="ButtonGem"
+                    Content="Gem"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Margin="3"
+                    Visibility="Visible" Click="ButtonGem_Click" />
+            <Button x:Name="ButtonFortryd"
+                    Content="Fortryd"
+                    Grid.Column="2"
+                    Grid.Row="1"
+                    Margin="3"
+                    Visibility="Visible" Click="ButtonFortryd_Click" />
+        </Grid>
+
+        <TextBox Grid.Column="2"
+                 Grid.Row="1"
+                 Text="{Binding fallbackSupplier.firmName}"
+                 Margin="3"
+                 FontSize="16"
+                 IsReadOnly="{Binding UCSIsReadOnly}"
+                 HorizontalContentAlignment="Left"
+                 VerticalContentAlignment="Center" />
+        <TextBox Grid.Column="2"
+                 Grid.Row="2"
+                 Text="{Binding fallbackSupplier.contactName}"
+                 Margin="3"
+                 FontSize="16"
+                 IsReadOnly="{Binding UCSIsReadOnly}"
+                 HorizontalContentAlignment="Left"
+                 VerticalContentAlignment="Center" />
+        <TextBox Grid.Column="2"
+                 Grid.Row="3"
+                 Text="{Binding fallbackSupplier.address}"
+                 Margin="3"
+                 FontSize="16"
+                 IsReadOnly="{Binding UCSIsReadOnly}"
+                 HorizontalContentAlignment="Left"
+                 VerticalContentAlignment="Center" />
+        <ComboBox Grid.Column="2"
+                 Grid.Row="5"
+                 Text=""
+                 Margin="5,7"
+                 FontSize="16"
+                 IsReadOnly="{Binding UCSIsReadOnly}"
+                 ItemsSource="{Binding listCountry}"
+                 SelectedItem="{Binding fallbackSupplier.country}"
+                 SelectedValue="{Binding fallbackSupplier.country.country}"
+                 SelectedValuePath="country"
+                 DisplayMemberPath="country"
+                 HorizontalContentAlignment="Left"
+                 VerticalContentAlignment="Center" />
+        <TextBox Grid.Column="2"
+                 Grid.Row="6"
+                 Text="{Binding fallbackSupplier.phone}"
+                 Margin="3"
+                 FontSize="16"
+                 IsReadOnly="{Binding UCSIsReadOnly}"
+                 HorizontalContentAlignment="Left"
+                 VerticalContentAlignment="Center" />
+        <TextBox Grid.Column="2"
+                 Grid.Row="7"
+                 Text="{Binding fallbackSupplier.mailAdr}"
+                 Margin="3"
+                 FontSize="16"
+                 IsReadOnly="{Binding UCSIsReadOnly}"
+                 HorizontalContentAlignment="Left"
+                 VerticalContentAlignment="Center" />
+    </Grid>
+</UserControl>
